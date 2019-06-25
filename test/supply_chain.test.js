@@ -9,8 +9,8 @@ with `npm install -g truffle`.
 
 */
 let BN = web3.utils.BN
-let SupplyChain = artifacts.require('SupplyChain')
 let catchRevert = require("./exceptionsHelpers.js").catchRevert
+let SupplyChain = artifacts.require('SupplyChain')
 
 contract('SupplyChain', function(accounts) {
 
@@ -100,7 +100,7 @@ contract('SupplyChain', function(accounts) {
         await instance.addItem(name, price, {from: alice})
         await instance.buyItem(0, {from: bob, value: excessAmount})
         await instance.shipItem(0, {from: alice})
-	
+  
         const result = await instance.fetchItem.call(0)
 
         assert.equal(result[3].toString(10), 2, 'the state of the item should be "Shipped", which should be declared third in the State Enum')
@@ -125,7 +125,7 @@ contract('SupplyChain', function(accounts) {
         await instance.buyItem(0, {from: bob, value: excessAmount})
         await instance.shipItem(0, {from: alice})
         await instance.receiveItem(0, {from: bob})
-	
+  
         const result = await instance.fetchItem.call(0)
 
         assert.equal(result[3].toString(10), 3, 'the state of the item should be "Received", which should be declared fourth in the State Enum')
@@ -153,5 +153,6 @@ contract('SupplyChain', function(accounts) {
 
         assert.equal(eventEmitted, true, 'adding an item should emit a Shipped event')
     })
+
 
 })
